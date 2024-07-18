@@ -4,3 +4,4 @@ config.yaml
 __pycache__/
 *.pyc
 *.pyo
+request_log.log
