@@ -1,7 +1,7 @@
 # openphone-bulk-sms
 When you need to send a bulk sms to your customers on Openphone in a one-off instance, such as notifying them of changing your phone number or shutting it down. Please use responsibly. 
 
-![Zapier](zapier.png | width=100)
+<img src="zapier.png" alt="Zapier" width="100">
 
 ## Configuration
 
