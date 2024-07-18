@@ -43,9 +43,10 @@ Ensure you have the `config_extract_phones.json` file properly configured as men
 
 ## Part 2: Bulk SMS Webhook Sender
 
+The main goal of this project is to send bulk SMS messages. Since OpenPhone does not have an API but does have Zapier integration, we use a Zapier webhook to trigger sending messages in OpenPhone.
+
 <img src="zapier.png" alt="Zapier" width="400">
 
-The main goal of this project is to send bulk SMS messages. Since OpenPhone does not have an API but does have Zapier integration, we use a Zapier webhook to trigger sending messages in OpenPhone.
 
 ### Configuration
 
