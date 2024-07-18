@@ -4,49 +4,66 @@ When you need to send a bulk SMS to your customers on OpenPhone in a one-off ins
 
 <img src="zapier.png" alt="Zapier" width="400">
 
-## Configuration
+## Overview
 
-To configure this project, follow these steps:
+This project consists of two main parts:
 
-1. Create a configuration file (`config.json`) with the following content:
+1. **Extracting Unique Phone Numbers**: This part involves extracting unique phone numbers from your OpenPhone data exports.
+2. **Bulk SMS Webhook Sender**: This part involves sending SMS messages to the extracted phone numbers via a Zapier webhook.
 
-   **config.json**:
-   ```json
-   {
-       "webhook_url": "YOUR_ZAPIER_WEBHOOK_URL",
-       "csv_path": "path/to/your/csvfile.csv"
-   }
-   ```
-
-   The CSV should have one column called `phone_number`. 
-
-## Extracting Unique Phone Numbers
+## Part 1: Extracting Unique Phone Numbers
 
 To extract all unique phone numbers from your OpenPhone data, follow these steps:
 
-1. **Export Your Data**: Export your contacts, calls, and messages data from OpenPhone and receive them as CSV files.
-2. **Prepare the CSV Files**: Place the exported CSV files in the same directory as this script and name them as follows:
-   - Contacts CSV: `contacts.csv`
-   - Calls CSV: `calls.csv`
-   - Messages CSV: `messages.csv`
-3. **Configuration**: Create a configuration file named `config_extract_phones.json` with the following content:
-   ```json
-   {
-       "contacts_csv": "contacts.csv",
-       "calls_csv": "calls.csv",
-       "messages_csv": "messages.csv",
-       "output_csv": "unique_phone_numbers.csv"
-   }
-   ```
+### Step 1: Export Your Data
 
-## Bulk SMS Webhook Sender
+Export your contacts, calls, and messages data from OpenPhone and receive them as CSV files.
 
-This script reads phone numbers from a CSV file and sends each number to a specified webhook URL. It ensures fault tolerance by logging responses, handling errors, and saving progress to the CSV file. The script also features a progress bar and configurable sleep interval between requests.
+### Step 2: Configuration
+
+Create a configuration file named `config_extract_phones.json` with the following content:
+```json
+{
+    "contacts_csv": "path/to/your/contacts.csv",
+    "calls_csv": "path/to/your/calls.csv",
+    "messages_csv": "path/to/your/messages.csv",
+    "output_csv": "unique_phone_numbers.csv"
+}
+```
+
+### Step 3: Run the Script
+
+To extract unique phone numbers from the exported OpenPhone data, run the script with the following command:
+
+```bash
+python extract_unique_phone_numbers.py
+```
+
+Ensure you have the `config_extract_phones.json` file properly configured as mentioned above.
+
+## Part 2: Bulk SMS Webhook Sender
+
+The main goal of this project is to send bulk SMS messages. Since OpenPhone does not have an API but does have Zapier integration, we use a Zapier webhook to trigger sending messages in OpenPhone.
+
+### Configuration
+
+Create a configuration file (`config.json`) with the following content:
+
+**config.json**:
+```json
+{
+    "webhook_url": "YOUR_ZAPIER_WEBHOOK_URL",
+    "csv_path": "path/to/your/csvfile.csv",
+    "sleep_interval": 3
+}
+```
+
+The CSV should have one column called `phone_number`.
 
 ### Features
 
 - **Reads phone numbers from a CSV file**: The CSV file must have a column named `phone_number`.
-- **Sends POST requests to a webhook**: The script sends each phone number to a specified webhook URL.
+- **Sends POST requests to a webhook**: The script sends each phone number to a specified Zapier webhook URL that triggers an SMS in OpenPhone.
 - **Fault tolerance**:
   - Logs responses and errors to a log file.
   - Saves response status, response text, and timestamp to the CSV file after each request.
@@ -54,23 +71,6 @@ This script reads phone numbers from a CSV file and sends each number to a speci
 - **Progress bar**: Uses tqdm to display a progress bar for the processing of phone numbers.
 - **Configurable sleep interval**: The sleep interval between requests can be set in the configuration file.
 - **Handles missing columns**: Ensures that required columns (`timestamp`, `status_code`, `response_text`, and `error_message`) exist in the CSV file.
-
-### Configuration
-
-The script is configured using a `config.json` file. The configuration file must include the following fields:
-
-- `webhook_url`: The URL of the webhook to which the phone numbers will be sent.
-- `csv_path`: The path to the CSV file containing the phone numbers.
-- `sleep_interval` (Optional): The number of seconds to wait between requests. Defaults to 3 seconds if not specified.
-
-**Example `config.json`:**
-```json
-{
-    "webhook_url": "YOUR_WEBHOOK_URL_HERE",
-    "csv_path": "path/to/your/file.csv",
-    "sleep_interval": 3
-}
-```
 
 ### CSV File
 
@@ -89,12 +89,4 @@ To run the script, use the following command:
 python send_webhook.py
 ```
 
-### Extracting Unique Phone Numbers Script Usage
-
-To extract unique phone numbers from the exported OpenPhone data, run the script with the following command:
-
-```bash
-python extract_unique_phone_numbers.py
-```
-
-Ensure you have the `config_extract_phones.json` file properly configured as mentioned above.
+Ensure you have the `config.json` file properly configured as mentioned above. This script will read the phone numbers from the CSV file and send each number to the specified Zapier webhook, which in turn sends an SMS through OpenPhone.
