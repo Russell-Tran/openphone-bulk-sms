@@ -47,6 +47,8 @@ The main goal of this project is to send bulk SMS messages. Since OpenPhone does
 
 ### Setting Up Zapier
 
+<img src="zapier.png" alt="Zapier" width="400">
+
 To set up Zapier to send SMS through OpenPhone, follow these steps:
 
 1. **Create a Zapier Account**: If you don't have one, sign up for a free account at [Zapier](https://zapier.com/).
