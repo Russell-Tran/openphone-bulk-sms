@@ -1,0 +1,6 @@
+config.json
+config_extract_phones.json
+config.yaml
+__pycache__/
+*.pyc
+*.pyo
