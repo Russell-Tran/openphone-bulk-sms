@@ -11,12 +11,10 @@ To configure this project, follow these steps:
 
    **config.json**:
    ```json
-    {
-    "webhook_url": "YOUR_ZAPIER_WEBHOOK_URL",
-    "csv_path": "path/to/your/csvfile.csv"
-    }
-
-The csv should have one column called `phone_number`. 
+   {
+       "webhook_url": "https://hooks.zapier.com/hooks/catch/abcdefg",
+       "phone_number": "123-456-7890"
+   }
 
 ## Extracting Unique Phone Numbers
 
