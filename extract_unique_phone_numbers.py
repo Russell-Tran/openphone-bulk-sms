@@ -74,8 +74,9 @@ valid_phone_numbers_series = pd.Series(valid_phone_numbers)
 print(f"Number of duplicates in valid phone numbers: {valid_phone_numbers_series.duplicated().sum()}")
 
 # Create a DataFrame for valid unique phone numbers
-# unique_phone_numbers_df = pd.DataFrame(valid_phone_numbers, columns=['phone_number']).drop_duplicates()
-unique_phone_numbers_df = pd.DataFrame(valid_phone_numbers, columns=['phone_number'])
+unique_phone_numbers_df = pd.DataFrame(valid_phone_numbers, columns=['phone_number']).drop_duplicates()
+
+#unique_phone_numbers_df = pd.DataFrame(valid_phone_numbers, columns=['phone_number'])
 
 # Test for duplicates in unique_phone_numbers_df
 print(f"Total unique phone numbers: {len(unique_phone_numbers_df)}")
@@ -87,9 +88,10 @@ unique_phone_numbers_df.to_csv(config['output_csv'], index=False)
 # Verify uniqueness by reading the CSV file back and checking for duplicates
 print("Verifying uniqueness of phone numbers in the output CSV...")
 output_df = pd.read_csv(config['output_csv'])
-output_df = output_df.drop_duplicates()  # Drop duplicates again just in case
 
 duplicate_phone_numbers = output_df[output_df.duplicated(subset='phone_number', keep=False)]
+print(f"Total phone numbers: {len(unique_phone_numbers_df)}")
+print(f"Number of duplicates in unique phone numbers: {output_df.duplicated().sum()}")
 
 if duplicate_phone_numbers.empty:
     print("Verification complete: All phone numbers are unique.")
