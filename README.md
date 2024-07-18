@@ -45,8 +45,28 @@ Ensure you have the `config_extract_phones.json` file properly configured as men
 
 The main goal of this project is to send bulk SMS messages. Since OpenPhone does not have an API but does have Zapier integration, we use a Zapier webhook to trigger sending messages in OpenPhone.
 
-<img src="zapier.png" alt="Zapier" width="400">
+### Setting Up Zapier
 
+To set up Zapier to send SMS through OpenPhone, follow these steps:
+
+1. **Create a Zapier Account**: If you don't have one, sign up for a free account at [Zapier](https://zapier.com/).
+
+2. **Create a New Zap**:
+   - Click on "Create Zap" in your Zapier dashboard.
+
+3. **Set Up the Trigger**:
+   - Choose "Webhooks by Zapier" as the trigger app.
+   - Select "Catch Hook" as the trigger event.
+   - Copy the custom webhook URL provided by Zapier. This will be used in your `config.json` file as the `webhook_url`.
+
+4. **Set Up the Action**:
+   - Choose "OpenPhone" as the action app.
+   - Select "Send Message" as the action event.
+   - Connect your OpenPhone account to Zapier if you haven't already.
+   - Set up the action to send an SMS using the phone number and message content. Map the phone number field to the data caught by the webhook.
+
+5. **Test the Zap**:
+   - Test the Zap to ensure that it correctly sends an SMS through OpenPhone.
 
 ### Configuration
 
